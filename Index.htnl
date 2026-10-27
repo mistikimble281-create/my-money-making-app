@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cen-Tex Commercial Shield</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;background:#f4f6fa;color:#202b3c}
+header{background:#142b4a;color:white;padding:28px 18px;text-align:center}
+header h1{margin:0 0 10px;font-size:27px}
+header p{margin:0;color:#dce8f8}
+main{max-width:900px;margin:auto;padding:22px 16px}
+.hero{background:white;border-radius:14px;padding:24px;box-shadow:0 3px 15px #0001}
+h2{color:#173c66}
+.packages{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:15px;margin:20px 0}
+.card{background:white;padding:20px;border-radius:12px;border:1px solid #dce3ed}
+.price{font-size:27px;font-weight:bold;color:#174c82}
+button{background:#174c82;color:white;border:0;padding:12px 17px;border-radius:7px;font-size:16px;cursor:pointer}
+button:hover{background:#0e345b}
+label{display:block;margin:12px 0 5px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:7px;font-size:16px}
+footer{text-align:center;padding:24px;color:#65748a}
+.notice{font-size:14px;color:#536277}
+</style>
+</head>
+<body>
+<header>
+<h1>Cen-Tex Commercial Shield</h1>
+<p>Home Service Leads for Local Professionals</p>
+</header>
+<main>
+<section class="hero">
+<h2>Find Your Next Customer</h2>
+<p>Connect with potential customers looking for home services in Central Texas.</p>
+<button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Started</button>
+</section>
+<h2>Lead Packages</h2>
+<div class="packages">
+<div class="card">
+<h3>Starter</h3><p class="price">$100</p>
+<p>5 home-service leads</p><p>$20 per lead</p>
+<button onclick="choose('Starter - $100')">Choose Starter</button>
+</div>
+<div class="card">
+<h3>Growth</h3><p class="price">$180</p>
+<p>10 home-service leads</p><p>$18 per lead</p>
+<button onclick="choose('Growth - $180')">Choose Growth</button>
+</div>
+<div class="card">
+<h3>Pro</h3><p class="price">$400</p>
+<p>25 home-service leads</p><p>$16 per lead</p>
+<button onclick="choose('Pro - $400')">Choose Pro</button>
+</div>
+</div>
+<section class="card" id="contact">
+<h2>Interested in Buying Leads?</h2>
+<p>Tell us about your business. We'll follow up about availability and package details.</p>
+<form id="leadForm">
+<label for="business">Business name</label>
+<input id="business" required placeholder="Your business name">
+<label for="name">Your name</label>
+<input id="name" required placeholder="Your name">
+<label for="email">Email address</label>
+<input id="email" type="email" required placeholder="you@example.com">
+<label for="phone">Phone number (optional)</label>
+<input id="phone" type="tel" placeholder="Your phone number">
+<label for="service">Home service type</label>
+<select id="service" required>
+<option value="">Select a service</option>
+<option>Plumbing</option><option>Roofing</option><option>HVAC</option>
+<option>House cleaning</option><option>Lawn care</option>
+<option>Electrical</option><option>Handyman</option><option>Other</option>
+</select>
+<label for="package">Package of interest</label>
+<select id="package">
+<option>Not sure yet</option><option>Starter - $100</option>
+<option>Growth - $180</option><option>Pro - $400</option>
+</select>
+<label for="message">Anything else? (optional)</label>
+<textarea id="message" rows="3" placeholder="Service area or questions"></textarea>
+<p class="notice">Submitting opens your email app so you can send this inquiry. No payment is collected on this website.</p>
+<button type="submit">Send Inquiry</button>
+</form>
+<p id="result" role="status"></p>
+</section>
+</main>
+<footer>© 2026 Cen-Tex Commercial Shield · Central Texas</footer>
+<script>
+function choose(p){
+document.getElementById('package').value=p;
+document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+}
+document.getElementById('leadForm').addEventListener('submit',function(e){
+e.preventDefault();
+const v=id=>document.getElementById(id).value;
+const subject=encodeURIComponent('Home Service Lead Inquiry - '+v('business'));
+const body=encodeURIComponent(
+'Business: '+v('business')+'\nName: '+v('name')+
+'\nEmail: '+v('email')+'\nPhone: '+v('phone')+
+'\nService: '+v('service')+'\nPackage: '+v('package')+
+'\nMessage: '+v('message'));
+document.getElementById('result').textContent='Opening your email app. Please send the prepared message to complete your inquiry.';
+window.location.href='mailto:?subject='+subject+'&body='+body;
+});
+</script>
+</body>
+</html>
